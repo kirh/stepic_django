@@ -37,7 +37,7 @@ from django.contrib.auth.models import User
 class Question(models.Model):
     class Meta:
         db_table = 'question'
-    title =  models.CharField(max_lenght = 50)
+    title =  models.CharField(max_length = 50)
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField()
