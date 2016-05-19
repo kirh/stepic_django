@@ -13,22 +13,41 @@ from django.contrib.auth.models import User
 #author - автор вопроса
 #likes - список пользователей, поставивших "лайк"
 
-class Question(models.Model):
-	title = models.CharField(max_length = 255)
-	text = models.TextField()
-	added_at = models.DateTimeField(auto_now = True)
-	rating = models.IntegerField(default = 0)
-	author = models.ForeignKey(User)
-	likes = models.ManyToManyField(User)
+# class Question(models.Model):
+# 	title = models.CharField(max_length = 255)
+# 	text = models.TextField()
+# 	added_at = models.DateTimeField(auto_now = True)
+# 	rating = models.IntegerField(default = 0)
+# 	author = models.ForeignKey(User)
+# 	likes = models.ManyToManyField(User)
+#
+# #Answer model
+# #text - текст ответа
+# #added_at - дата добавления ответа
+# #question - вопрос, к которому относится ответ
+# #author - автор ответа
+#
+# class Answer(models.Model):
+# 	text = models.TextField()
+# 	added_at = models.DateTimeField(auto_now = True)
+# 	question = models.ForeignKey(Question)
+# 	author = models.ForeignKey(User)
 
-#Answer model
-#text - текст ответа
-#added_at - дата добавления ответа
-#question - вопрос, к которому относится ответ
-#author - автор ответа
+
+class Question(models.Model):
+    class Meta:
+        db_table = 'question'
+    title =  models.CharField(max_lengt = 50)
+    text = models.TextField()
+    added_at = models.DateTimeField(auto_now_add=True)
+    rating = models.IntegerField()
+    author = models.ForeignKey(User)
+    likes = models.ManyToManyField(User)
 
 class Answer(models.Model):
-	text = models.TextField()
-	added_at = models.DateTimeField(auto_now = True)
-	question = models.ForeignKey(Question)
-	author = models.ForeignKey(User)
+    class Meta:
+        db_table = 'answer'
+    text = models.TextField()
+    added_at = DateTimeField(auto_now_add = True)
+    question = ForeignKey(Question)
+    author = ForeignKey(User)
