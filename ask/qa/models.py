@@ -33,6 +33,12 @@ from django.contrib.auth.models import User
 # 	question = models.ForeignKey(Question)
 # 	author = models.ForeignKey(User)
 
+class QuestionManager(models.Manager):
+    def new(self):
+        return True
+
+    def popular(self):
+        return True
 
 class Question(models.Model):
     class Meta:
@@ -43,6 +49,7 @@ class Question(models.Model):
     rating = models.IntegerField(default = 0)
     author = models.ForeignKey(User)
     likes = models.ManyToManyField(User, related_name='likes_set')
+    objects = QuestionManager()
 
 class Answer(models.Model):
     class Meta:
@@ -51,3 +58,4 @@ class Answer(models.Model):
     added_at = models.DateTimeField(auto_now_add = True)
     question = models.ForeignKey(Question)
     author = models.ForeignKey(User)
+
