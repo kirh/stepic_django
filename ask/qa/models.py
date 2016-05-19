@@ -48,6 +48,6 @@ class Answer(models.Model):
     class Meta:
         db_table = 'answer'
     text = models.TextField()
-    added_at = DateTimeField(auto_now_add = True)
-    question = ForeignKey(Question)
-    author = ForeignKey(User)
+    added_at = models.DateTimeField(auto_now_add = True)
+    question = models.ForeignKey(Question)
+    author = models.ForeignKey(User)
