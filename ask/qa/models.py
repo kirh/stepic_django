@@ -40,6 +40,7 @@ class QuestionManager(models.Manager):
     def popular(self):
         return True
 
+
 class Question(models.Model):
     class Meta:
         db_table = 'question'
@@ -51,6 +52,10 @@ class Question(models.Model):
     likes = models.ManyToManyField(User, related_name='likes_set')
     objects = QuestionManager()
 
+    def __unicode__(self):
+        return self.title
+
+
 class Answer(models.Model):
     class Meta:
         db_table = 'answer'
@@ -59,3 +64,5 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     author = models.ForeignKey(User)
 
+    def __unicode__(self):
+        return self.text
