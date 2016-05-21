@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Question Detail</title>
+    </head>
+    <body>
+
+        <h1>Ответы на вопрос</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>Текст</td>
+                    <td>Время добавления</td>
+                    <td>Автор</td>
+                </tr>
+            </thead>
+            {% for a in answers %}
+                <tr>
+                    <td>{{ a.text }}</td>
+                    <td>{{ a.added_at }}</td>
+                    <td>{{ a.author }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

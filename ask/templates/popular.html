@@ -6,14 +6,14 @@
     </head>
     <body>
 
-        <h1>Вопросы и ответы</h1>
+        <h1>Популярные Вопросы и ответы</h1>
         <table border="1">
             <thead>
                 <tr>
                     <th>Заголовок</th>
 {#                    <td>Текст</td>#}
 {#                    <td>Время добавления</td>#}
-{#                    <td>Рейтинг</td>#}
+                    <td>Рейтинг</td>
 {#                    <td>Автор</td>#}
 {#                    <td>Лайки</td>#}
                 </tr>
@@ -23,7 +23,7 @@
                     <td><a href="{% url 'question' q.id %}">{{ q.title }}</a></td>
 {#                    <td>{{ q.text }}</td>#}
 {#                    <td>{{ q.added_at }}</td>#}
-{#                    <td>{{ q.rating }}</td>#}
+                    <td>{{ q.rating }}</td>
 {#                    <td>{{ q.author }}</td>#}
 {#                    <td>{% for l in q.likes.all %}{{ q }}<br/> {% endfor %}</td>#}
                 </tr>
