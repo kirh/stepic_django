@@ -36,7 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'qa'
+    'autofixture',
+    'qa',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,8 +53,7 @@ ROOT_URLCONF = 'ask.urls'
 
 WSGI_APPLICATION = 'ask.wsgi.application'
 
-TEMPLATE_DIR = os.path.dirname(BASE_DIR)
-TEMPLATE_DIRS = [os.path.join(TEMPLATE_DIR, 'templates')]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 
 # Database

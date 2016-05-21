@@ -18,6 +18,6 @@ def post_list_all(request):
     paginator.baseurl = '/?page='
     page = paginator.page(page) # Page
     return render(request, 'index.html', {
-        'posts': page.object_list,
+        'questions': page.object_list,
         'paginator': paginator, 'page': page,
     })

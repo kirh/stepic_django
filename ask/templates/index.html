@@ -5,20 +5,43 @@
         {% block extrahead %}{% endblock %}
     </head>
     <body>
+
         <h1>Вопросы и ответы</h1>
-        {% block content %}{% endblock %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Заголовок</th>
+                    <td>Текст</td>
+                    <td>Время добавления</td>
+                    <td>Рейтинг</td>
+                    <td>Автор</td>
+                    <td>Лайки</td>
+                </tr>
+            </thead>
+            {% for q in questions %}
+                <tr>
+                    <td>{{ q.title }}</td>
+                    <td>{{ q.text }}</td>
+                    <td>{{ q.added_at }}</td>
+                    <td>{{ q.rating }}</td>
+                    <td>{{ q.author }}</td>
+                    <td>{% for l in q.likes.all %}{{ q }}<br/> {% endfor %}</td>
+                </tr>
+            {% endfor %}
+        </table>
+{#        {% block content %}{% endblock %}#}
 
         <!--Шаблон пагинатор ниже-->
     <nav><ul class="pagination">
         {% for p in paginator.page_range %}
-        {% if p.number == page.number %}
-        <li class="active">
-        {% else %}
-        <li>
-        {% endif %}
-        <a href="{{ paginator.baseurl }}{{ p.number }}">
-        {{ p.number }}</a>
-        </li>
+            {% if p.number == page.number %}
+                <li class="active">
+            {% else %}
+                <li>
+            {% endif %}
+            <a href="{{ paginator.baseurl }}{{ p }}">
+                {{ p }}</a>
+            </li>
         {% endfor %}
     </ul></nav>
 
