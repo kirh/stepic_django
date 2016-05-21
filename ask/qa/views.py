@@ -42,5 +42,6 @@ def question(request, question_id):
 
     answers = Answer.objects.filter(question=q)[:]
     return render(request, 'question.html', {
-        'answers': answers
+        'answers': answers,
+        'question': q
     })
