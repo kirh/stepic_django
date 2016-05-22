@@ -24,5 +24,26 @@
                 </tr>
             {% endfor %}
         </table>
+        {% for e in form.non_field_errors %}
+            <div class="alert alert-danger">{{ e }}</div>
+        {% endfor %}
+        <form class="form-horizontal" method="post" action="{% url 'answer' %}">
+            <fieldset>
+                {% csrf_token %}
+                {% for field in form %}
+                    {% if field.name != 'question' %}
+                        <div class="control-group">
+                            {% if field.errors %}has-error{% endif %}
+                            <label class="control-label">{{ field.label }}:</label>
+                            <div class="controls">{{ field }}</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <input type="hidden" name="question" value="{{ question.id }}">
+            </fieldset>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
     </body>
 </html>

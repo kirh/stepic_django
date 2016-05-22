@@ -2,10 +2,12 @@
 
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, Http404
+from django.shortcuts import render, Http404, HttpResponseRedirect
 
 from models import Question, Answer
+from forms import AskForm, AnswerForm
 
 
 def test(request, *args, **kwargs):
@@ -41,7 +43,38 @@ def question(request, question_id):
         raise Http404()
 
     answers = Answer.objects.filter(question=q)[:]
+    form = AnswerForm()
     return render(request, 'question.html', {
         'answers': answers,
-        'question': q
+        'question': q,
+        'form': form
     })
+
+def ask(request):
+    if request.method == "POST":
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'ask.html', {
+        'form': form
+    })
+
+def answer(request):
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+
+        print form.data
+        if form.is_valid():
+            answer = form.save()
+            url = answer.get_url()
+            print url
+            return HttpResponseRedirect(url)
+        else:
+            raise Http404
+            # return HttpResponseRedirect(reverse('question'), [question_id])
+    else:
+        raise Http404

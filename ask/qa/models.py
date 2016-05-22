@@ -48,12 +48,16 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default = 0)
-    author = models.ForeignKey(User)
-    likes = models.ManyToManyField(User, related_name='likes_set')
+    author = models.ForeignKey(User, null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='likes_set', null=True,
+                                   blank=True)
     objects = QuestionManager()
 
     def __unicode__(self):
         return self.title
+
+    def get_url(self):
+        return '/question/%s' % self.id
 
 
 class Answer(models.Model):
@@ -62,7 +66,10 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add = True)
     question = models.ForeignKey(Question)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, null=True, blank=True)
 
     def __unicode__(self):
         return self.text
+
+    def get_url(self):
+        return '/question/%s' % self.question.id
